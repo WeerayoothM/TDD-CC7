@@ -1,5 +1,6 @@
 const greet = (name) => {
     // Test 2
+    let message = "Hello, ";
     if (name === null) {
         return "Hello, my friend."
     }
@@ -7,7 +8,6 @@ const greet = (name) => {
         // Test 6
         const idxShoutedName = name.findIndex(name => name === name.toUpperCase());
         if (idxShoutedName !== -1) {
-            let message = "Hello, ";
             let ieie = [...name];
             ieie.splice(idxShoutedName, 1);
             message += ieie.join(' and ');
@@ -18,11 +18,8 @@ const greet = (name) => {
         // Test 8
         const idxWithDoubleQuotes = name.findIndex(name => name.includes('"'));
         if (idxWithDoubleQuotes !== -1) {
-            let message = "Hello, ";
             const ieie = name.reduce((names, name, idx) => {
-                console.log('name', name)
                 if (idx === idxWithDoubleQuotes) {
-                    // console.log('in if 1', name[0])
                     const escapedName = name.substr(1, name.length - 2);
                     return [...names, escapedName];
                 }
@@ -35,7 +32,6 @@ const greet = (name) => {
         // Test 7
         const idxThereComma = name.findIndex(name => name.includes(','));
         if (idxThereComma !== -1) {
-            let message = "Hello, ";
             let ieie = [...name];
             ieie.splice(idxThereComma, 1, ...ieie[idxThereComma].split(', '));
             name = ieie;
@@ -43,19 +39,18 @@ const greet = (name) => {
 
         // Test 5
         if (name.length > 2) {
-            let message = "Hello";
             for (let i = 0; i < name.length; i++) {
                 if (i === name.length - 1) {
-                    message += `, and ${name[i]}.`
+                    message += `and ${name[i]}.`
                     break
                 }
-                message += `, ${name[i]}`
+                message += `${name[i]}, `
             }
             return message;
         }
 
         // Test 4
-        return `Hello, ${name[0]} and ${name[1]}.`
+        return message + `${name[0]} and ${name[1]}.`
     }
 
     // Test 3
@@ -64,7 +59,7 @@ const greet = (name) => {
     }
 
     // Test 1
-    return `Hello, ${name}.`;
+    return message + `${name}.`;
 }
 
 module.exports = { greet }
